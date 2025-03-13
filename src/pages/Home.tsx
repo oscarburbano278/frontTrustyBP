@@ -1,23 +1,27 @@
-import { useTranslation } from "react-i18next";
-import type { FunctionComponent } from "../common/types";
+import type { FunctionComponent } from "react";
+import Logo from "../assets/images/logo.png";
 
-export const Home = (): FunctionComponent => {
-	const { t, i18n } = useTranslation();
 
-	const onTranslateButtonClick = async (): Promise<void> => {
-		if (i18n.resolvedLanguage === "en") {
-			await i18n.changeLanguage("es");
-		} else {
-			await i18n.changeLanguage("en");
-		}
-	};
+
+export const Home: FunctionComponent = () => {
+
+	// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+	const handleClick = () => {
+		window.location.href = "/Auth";
+	}
 
 	return (
-		<div className="bg-blue-300  font-bold w-screen h-screen flex flex-col justify-center items-center">
-			<p className="text-white text-6xl">{t("home.greeting")}</p>
-			<button type="submit" onClick={onTranslateButtonClick}>
-				translate
-			</button>
+		<div className="bg-[#131127]  font-bold w-screen h-screen flex flex-col justify-center items-center">
+			<img 
+				alt="Logo" 
+				className="cursor-pointer hover:opacity-80 transition"
+				src={Logo}
+				onClick={handleClick}
+				/>
+			<h1 className="mt-4 text-white text-4xl">Trusty</h1>
+			<h2 className="mt-4 text-white text-2xl">Tu Dinero Seguro</h2>
+			
+			
 		</div>
 	);
 };
