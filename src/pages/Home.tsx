@@ -1,14 +1,12 @@
 import type { FunctionComponent } from "react";
 import Logo from "../assets/images/logo.png";
+import { useNavigate } from "@tanstack/react-router";
 
 
 
 export const Home: FunctionComponent = () => {
 
-	// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-	const handleClick = () => {
-		window.location.href = "/Auth";
-	}
+	const navigate = useNavigate();
 
 	return (
 		<div className="bg-[#131127]  font-bold w-screen h-screen flex flex-col justify-center items-center">
@@ -16,7 +14,7 @@ export const Home: FunctionComponent = () => {
 				alt="Logo" 
 				className="cursor-pointer hover:opacity-80 transition"
 				src={Logo}
-				onClick={handleClick}
+				onClick={() => navigate({ to: "/auth" })}
 				/>
 			<h1 className="mt-4 text-white text-4xl">Trusty</h1>
 			<h2 className="mt-4 text-white text-2xl">Tu Dinero Seguro</h2>

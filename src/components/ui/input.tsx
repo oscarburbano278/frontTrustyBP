@@ -4,9 +4,10 @@ import type { InputProps } from "../../common/types";
 
 
 const Input: React.FC<InputProps> = ({
-  type = "text",
-  placeholder = "",
-  value = "",
+  type,
+  placeholder,
+  value,
+  name,
   onChange,
   onBlur,
   required = false,
@@ -23,9 +24,11 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <input
-      className={`${baseStyles} ${variantStyles[variant]} ${disabled ? "bg-gray-200 cursor-not-allowed" : ""}`}
+    <input    
+      className={`${baseStyles} ${variantStyles[variant]} ${disabled ? "w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 " : ""}`}
       disabled={disabled}
+      
+      name={name}
       placeholder={placeholder}
       required={required}
       type={type}

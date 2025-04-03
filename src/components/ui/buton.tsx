@@ -30,7 +30,7 @@ const Button: React.FC<ButtonProps & { customColor?: string }> = ({
 
   return (
     <button
-    className={`${baseStyles} ${customColor ? customColor : variantStyles[variant]} ${sizeStyles[size]} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+    className={`${baseStyles} ${customColor ? customColor : variantStyles[variant]} ${sizeStyles[size]} ${disabled ? "w-full bg-green-500 hover:bg-green-800 text-white font-semibold py-3 rounded-md transition duration-300" : ""}`}
       disabled={disabled}
       type={type}
       onClick={onClick}
