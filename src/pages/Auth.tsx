@@ -1,6 +1,7 @@
 import AutRegister from "../components/layout/autRegster";
 import Logo from "../assets/images/logo.png";
 import type { FunctionComponent } from "react";
+import FormLogin from "./FormLogin";
 
 
 const Auth: FunctionComponent = () => {
@@ -29,7 +30,7 @@ const Auth: FunctionComponent = () => {
                 {/* Sección de Inicio de Sesión */}
                 <div className="w-1/3 p-8 flex flex-col justify-center">
                 
-                    
+                 <FormLogin />   
 
                 </div>
 
