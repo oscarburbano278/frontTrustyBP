@@ -86,3 +86,14 @@ export type SuccessModalProps = {
   isOpen: boolean;
   onClose: () => void;
 }
+
+export type ModalDynamicProps = {
+  title?: string;
+  message?: string;
+  buttonText?: string;
+  onClose: () => void;
+  customClass?: string; // clases personalizadas para el contenedor
+  titleClass?: string;  // clases personalizadas para el título
+  messageClass?: string; // clases personalizadas para el mensaje
+  buttonClass?: string;  // clases personalizadas para el botón
+}
