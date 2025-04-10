@@ -28,8 +28,11 @@ const Container: FunctionComponent<ContainerProps> = ({
       </header>
 
       {/* Contenedor Principal dinámico */}
-      {/* <div className="w-full max-w-5xl bg-[#231f4e] shadow-lg rounded-lg p-0 mt-4"> */}
-      <div className="w-full max-w-3xl mx-auto p-6 lg:p-12 bg-white shadow-md rounded-lg">
+      
+      <div className="w-full max-w-md mx-auto p-6 lg:p-12 bg-white shadow-md rounded-lg">
+
+
+
       
       {children} {/* Contenido dinámico */}
       </div>

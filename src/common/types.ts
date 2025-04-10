@@ -97,3 +97,4 @@ export type ModalDynamicProps = {
   messageClass?: string; // clases personalizadas para el mensaje
   buttonClass?: string;  // clases personalizadas para el botón
 }
+
