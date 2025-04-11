@@ -3,6 +3,8 @@ import DynamicForm from "../components/forms/dynamicForm";
 import Button from "../components/ui/buton";
 import Input from "../components/ui/input";
 import type { ValidateFormProps } from "../common/types";
+import { validateCorreo, validateContraseña } from '../components/utils/validators';
+
 
 const FormLogin: React.FC = () => {
   
@@ -26,35 +28,16 @@ const FormLogin: React.FC = () => {
     }));
   };
 
-  // Expresiones regulares para validaciones
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
   
-    const validateForm: React.FC<ValidateFormProps> = () => {
-        const newErrors = { correo: "", contraseña: "" };
-        let isValid = true;
-    
-        // 1️⃣ Validar Correo Electrónico
-        if (!formData.correo.trim()) {
-        newErrors.correo = "El correo es obligatorio";
-        isValid = false;
-        } else if (!emailRegex.test(formData.correo)) {
-        newErrors.correo = "Ingrese un correo válido";
-        isValid = false;
-        }
-    
-        // 2️⃣ Validar Contraseña
-        if (!formData.contraseña) {
-        newErrors.contraseña = "La contraseña es obligatoria";
-        isValid = false;
-        } else if (!passwordRegex.test(formData.contraseña)) {
-        newErrors.contraseña = "Debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial";
-        isValid = false;
-        }
-    
+      const validateForm: React.FC<ValidateFormProps> = () => {
+        const newErrors = {
+          correo: validateCorreo(formData.correo),
+          contraseña: validateContraseña(formData.contraseña),
+        };
+      
         setErrors(newErrors);
-        return isValid;
-    };  
+        return Object.values(newErrors).every((error) => error === "");
+      };
 
 
   const handleSubmit = (event_: React.FormEvent): void => {
@@ -95,7 +78,7 @@ const FormLogin: React.FC = () => {
 
         {/* Enlace para recuperar contraseña */}
         <div className="flex justify-center mt-4">
-            <a className="text-gray-800 hover:underline" href="#">
+            <a className="text-gray-800 hover:underline" href="/recoverPass">
                 ¿Olvidaste tu contraseña?
             </a>
         </div>

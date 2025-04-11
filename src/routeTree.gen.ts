@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as RegisterImport } from './routes/register'
+import { Route as RecoverPassImport } from './routes/recoverPass'
 import { Route as AuthImport } from './routes/auth'
 import { Route as IndexImport } from './routes/index'
 
@@ -19,6 +20,11 @@ import { Route as IndexImport } from './routes/index'
 
 const RegisterRoute = RegisterImport.update({
   path: '/register',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RecoverPassRoute = RecoverPassImport.update({
+  path: '/recoverPass',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -50,6 +56,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
+    '/recoverPass': {
+      id: '/recoverPass'
+      path: '/recoverPass'
+      fullPath: '/recoverPass'
+      preLoaderRoute: typeof RecoverPassImport
+      parentRoute: typeof rootRoute
+    }
     '/register': {
       id: '/register'
       path: '/register'
@@ -65,6 +78,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AuthRoute,
+  RecoverPassRoute,
   RegisterRoute,
 })
 
@@ -78,6 +92,7 @@ export const routeTree = rootRoute.addChildren({
       "children": [
         "/",
         "/auth",
+        "/recoverPass",
         "/register"
       ]
     },
@@ -86,6 +101,9 @@ export const routeTree = rootRoute.addChildren({
     },
     "/auth": {
       "filePath": "auth.ts"
+    },
+    "/recoverPass": {
+      "filePath": "recoverPass.ts"
     },
     "/register": {
       "filePath": "register.ts"

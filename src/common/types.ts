@@ -33,6 +33,7 @@ export type InputProps = {  //tipos para el input
   variant?: "primary" | "secondary" | "error";
   key?: number;
   maxLength?: number;
+  className?: string;
 }
 
 export type LabelLinkProps = {  //tipos para el link
