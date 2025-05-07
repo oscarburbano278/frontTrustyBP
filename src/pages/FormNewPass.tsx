@@ -59,6 +59,7 @@ const NewPassword: React.FC = () => {
   
     return (
         <Container
+            customClass="max-w-md"
             logoPosition="center"           
             title="Recuperar Contraseña">
 

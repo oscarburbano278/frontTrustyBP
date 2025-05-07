@@ -7,7 +7,7 @@ const AutRegister: React.FC = () => {
     const navigate = useNavigate();
 
     return(
-        <div className="bg-white p-6 rounded-lg shadow-lg w-78">
+        <div className="bg-white p-10 rounded-lg shadow-lg w-78">
             
             <h2 className="mt-4 text-3xl font-extrabold mb-4 text-center text-blue-800 hover:scale-105 transition-transform duration-200">
                 Regístrate

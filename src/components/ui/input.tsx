@@ -1,15 +1,16 @@
 import type React from "react";
 import type { InputProps } from "../../common/types";
 
-
-
 const Input: React.FC<InputProps> = ({
   type,
   placeholder,
+  label,
   value,
+  checked,
   name,
   onChange,
   onBlur,
+  error,
   required = false,
   disabled = false,
   variant = "primary",
@@ -24,18 +25,28 @@ const Input: React.FC<InputProps> = ({
   };
 
   return (
-    <input    
-      className={`${baseStyles} ${variantStyles[variant]} ${disabled ? "w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 " : ""}`}
-      disabled={disabled}
-      
-      name={name}
-      placeholder={placeholder}
-      required={required}
-      type={type}
-      value={value}
-      onBlur={onBlur}
-      onChange={onChange}
-    />
+    <label className="block">
+      {label && <span className="text-gray-700">{label}</span>}
+      <input
+        checked={type === "checkbox" ? checked : undefined} // Usar `checked` para checkboxes
+        disabled={disabled}
+        name={name}
+        placeholder={placeholder}
+        required={required}
+        type={type}
+        value={type === "checkbox" ? undefined : value || ""} // Usar `undefined` para checkboxes
+        className={`${baseStyles} ${variantStyles[variant]} ${
+          disabled ? "w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 " : ""
+        }`}
+        onBlur={onBlur}
+        onChange={(event) =>
+          type === "checkbox"
+            ? onChange(event.target.checked) // Pasar `checked` para checkboxes
+            : onChange(event.target.value) // Pasar `value` para otros inputs
+        }
+      />
+      {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+    </label>
   );
 };
 

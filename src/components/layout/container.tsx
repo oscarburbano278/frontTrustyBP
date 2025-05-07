@@ -8,7 +8,8 @@ const Container: FunctionComponent<ContainerProps> = ({
   title = "Trusty",
   showLogo = true,
   logoPosition = "center",
-  children
+  children,
+  customClass = "", // Nueva prop para clases personalizadas
   
 }) => {
   // Clases dinámicas para la alineación del encabezado
@@ -19,7 +20,7 @@ const Container: FunctionComponent<ContainerProps> = ({
   }[logoPosition];
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-[#131127] p-6">
+    <div className={`flex flex-col items-center min-h-screen bg-[#131127] p-6 `}>
       
       {/* Encabezado con opciones dinámicas */}
       <header className={`flex ${headerAlignment} items-center gap-4 w-full max-w-5xl p-6`}>
@@ -29,7 +30,9 @@ const Container: FunctionComponent<ContainerProps> = ({
 
       {/* Contenedor Principal dinámico */}
       
-      <div className="w-full max-w-md mx-auto p-6 lg:p-12 bg-white shadow-md rounded-lg">
+      <div className={`w-full mx-auto p-6 lg:p-12 bg-white shadow-md rounded-lg ${customClass}`}>
+      {/* <div className={`w-full max-w-md mx-auto p-6 lg:p-12 bg-white shadow-md rounded-lg || ${customClass}`}></div> */}
+        
 
 
 

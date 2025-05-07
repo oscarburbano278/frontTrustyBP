@@ -22,12 +22,15 @@ export type ButtonProps = {  //tipos para el botón
 
 
 export type InputProps = {  //tipos para el input
-  type?: "text" | "password" | "email" | "number" | "checkbox";
-  placeholder: string;
-  value?: string;
-  name?: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  type: "text" | "email" | "password" | "checkbox"; // Tipos de input soportados
+  placeholder?: string; // Placeholder opcional
+  label?: string; // Etiqueta opcional
+  value?: string; // Valor para inputs de texto, email, password
+  checked?: boolean; // Estado para checkboxes
+  name: string; // Nombre del input
+  onChange: (value: string | boolean) => void; // Función para manejar cambios (texto o booleano)
+  onBlur?: () => void; // Evento opcional para manejar blur
+  error?: string; 
   required?: boolean;
   disabled?: boolean;
   variant?: "primary" | "secondary" | "error";
@@ -56,16 +59,17 @@ export type ContainerProps = {  //tipos para el contenedor
   showLogo?: boolean; // Mostrar o no el logo
   logoPosition?: "left" | "center" | "right"; // Posición del logo y título
   children?: ReactNode; // Contenido dinámico
+  customClass?: string; // Clases personalizadas para el contenedor
   
 }
 
-export type DynamicFormProps = {
-  title: string;
-  titleClassName?: string; // Clase personalizada para el título
-  children?: React.ReactNode; // Aquí van los inputs, botones, etc.
-  onSubmit?: (event_: React.FormEvent<HTMLFormElement>) => void;
-  className?: string; // Permite personalizar clases adicionales
-}
+// export type DynamicFormProps = {
+//   title?: string;
+//   titleClassName?: string; // Clase personalizada para el título
+//   children?: React.ReactNode; // Aquí van los inputs, botones, etc.
+//   onSubmit?: (event_: React.FormEvent<HTMLFormElement>) => void;
+//   className?: string; // Permite personalizar clases adicionales
+// }
 
 export type ValidateFormProps = {
   correo: string;
@@ -99,3 +103,38 @@ export type ModalDynamicProps = {
   buttonClass?: string;  // clases personalizadas para el botón
 }
 
+export type FieldConfig = {
+  error: string | undefined;
+  label?: string | undefined;
+  name: string;
+  placeholder: string;
+  type: "text" | "email" | "password" | "checkbox"; // Tipos de input soportados 
+  value: string;
+  onChange: (value: string) => void;
+  onBlur?: (value: string) => void;
+  required?: boolean;
+  disabled?: boolean;
+  maxLength?: number;
+  className?: string;
+  key?: number;
+  // Agrega más propiedades según tus necesidades
+};
+export type ButtonConfig = {
+  label: string;
+  type: "button" | "submit";
+  onClick: () => void;
+  className?: string;
+  // Agrega más propiedades según tus necesidades
+};
+export type DynamicFormProps = {
+  title?: string;
+  label?: string;
+  fields: FieldConfig[];
+  buttons: ButtonConfig[];
+  onSubmit: (event: React.FormEvent) => void;
+  className?: string; // Permite personalizar clases adicionales
+  titleClassName?: string; // Clase personalizada para el título
+  children?: React.ReactNode; // Aquí van los inputs, botones, etc.
+  //onSubmit?: (event_: React.FormEvent<HTMLFormElement>) => void;
+  // Agrega más propiedades según tus necesidades
+};
