@@ -157,7 +157,7 @@ const FormRegister: React.FC = () => {
       placeholder: "Correo Electrónico",
       type: "email",
       value: formData.correo,
-      onChange: (value: string) => { handleInputChange("correo", value); },
+      onChange: (value: string): void => { handleInputChange("correo", value); },
       error: errors.correo,
     },
     {
@@ -165,7 +165,7 @@ const FormRegister: React.FC = () => {
       placeholder: "Contraseña",
       type: "password",
       value: formData.contraseña,
-      onChange: (value: string) => { handleInputChange("contraseña", value); },
+      onChange: (value: string): void => { handleInputChange("contraseña", value); },
       error: errors.contraseña,
     },    
   ];

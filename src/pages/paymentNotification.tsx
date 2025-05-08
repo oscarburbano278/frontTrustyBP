@@ -1,5 +1,6 @@
 import Container from "../components/layout/container";
 import type { PaymentNotificationProps } from "../common/types";
+import Buton from "../components/ui/buton";
 
 
 const PaymentNotification: React.FC<PaymentNotificationProps> = ({
@@ -20,7 +21,21 @@ const PaymentNotification: React.FC<PaymentNotificationProps> = ({
           identificación: <span className="font-bold text-blue-800">{identificacion}</span>.
         </p>
       </div>
-    </Container>
+
+      <div className="mt-4 p-6 bg-white rounded-lg shadow-md flex items-center justify-center ">        
+        <Buton
+          customColor="bg-green-400 text-white py-2 rounded-lg hover:bg-green-800"
+          text="Aceptar"
+          type="button"
+          onClick={() => {
+            // Aquí puedes agregar la lógica para cerrar la notificación o redirigir al usuario
+            console.log("Notificación aceptada");
+          }}
+          />
+      </div>     
+    
+    </Container>  
+
   );
 };
 
