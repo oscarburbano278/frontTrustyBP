@@ -138,3 +138,9 @@ export type DynamicFormProps = {
   //onSubmit?: (event_: React.FormEvent<HTMLFormElement>) => void;
   // Agrega más propiedades según tus necesidades
 };
+export type PaymentNotificationProps = {
+  monto: string | number;
+  nombre: string;
+  identificacion: string;
+  
+}
