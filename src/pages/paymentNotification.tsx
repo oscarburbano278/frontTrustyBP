@@ -16,9 +16,15 @@ const PaymentNotification: React.FC<PaymentNotificationProps> = ({
         <h2 className="text-xl font-bold text-blue-800 mb-4">Notificación de Pago</h2>
         <p className="text-gray-700">
           Trusty le informa que nuestra aplicación tiene un monto de{" "}
-          <span className="font-bold text-blue-800">${formattedMonto}</span> retenido por el
+          <span className="font-bold text-blue-800">${formattedMonto}</span> retenido. Enviado por el
           Sr(a): <span className="font-bold text-blue-800">{nombre}</span> con número de
           identificación: <span className="font-bold text-blue-800">{identificacion}</span>.
+        </p>
+        <br></br>
+
+        <p className="text-gray-700">
+          Este dinero {" "} <span className="font-bold text-blue-800">${formattedMonto}</span> será depositado al numere de identificacion: <span className="font-bold text-blue-800">{identificacion}</span>.
+          perteneciente al Sr(a): <span className="font-bold text-blue-800">{nombre}</span>
         </p>
       </div>
 
