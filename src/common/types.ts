@@ -144,3 +144,21 @@ export type PaymentNotificationProps = {
   identificacion: string;
   
 }
+
+export type TransactionTableProps = {
+  // eslint-disable-next-line no-use-before-define
+  transactions: Transaction[]; // Lista de transacciones
+  customClass?: string; // Clases personalizadas para el contenedor
+  title?: string; // Título opcional
+  titleClassName?: string; // Clase personalizada para el título
+  children?: React.ReactNode; // Aquí van los inputs, botones, etc.
+  onSubmit?: (event_: React.FormEvent<HTMLFormElement>) => void;
+}
+export type Transaction = {
+  producto: string;
+  fecha: string;
+  usuario: string;
+  precio: string;
+  estado: string;
+  tipo: string;
+}
