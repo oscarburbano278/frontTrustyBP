@@ -1,13 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Home } from "../pages/Home";
-import TransactionsScreen from "../pages/TransactionsScreen";
-import TransactionTable from "../components/forms/transactionTable";
+import CreateSale from "../pages/CreateSale";
+
+
 
 
 
 export const Route = createFileRoute("/")({
-	//component: Home,		
-	component: TransactionsScreen,	
-	//component: TransactionTable,
-	
+	//component: Home;
+	component: CreateSale,
 });
