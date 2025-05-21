@@ -162,3 +162,7 @@ export type Transaction = {
   estado: string;
   tipo: string;
 }
+
+export type DynamicTransactionsScreenProps = {
+  children?: React.ReactNode; // Contenido dinámico que se mostrará en el centro
+}
