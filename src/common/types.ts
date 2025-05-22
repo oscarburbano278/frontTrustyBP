@@ -166,3 +166,11 @@ export type Transaction = {
 export type DynamicTransactionsScreenProps = {
   children?: React.ReactNode; // Contenido dinámico que se mostrará en el centro
 }
+
+export type Field = {
+  name: string;
+  placeholder: string;
+  type: string;
+  value: string;
+  readOnly: boolean;
+}

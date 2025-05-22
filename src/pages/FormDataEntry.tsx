@@ -1,12 +1,8 @@
 import { useState } from "react";
 import DynamicForm from "../components/forms/dynamicForm";
 import Container from "../components/layout/container";
-import {
-  validateNombre,
-  validateCedula,
-  validateCorreo,
-  validateTelefono,
-} from "../components/utils/validators";
+import type { Field } from "../common/types";
+
 
 const FormDataEntry: React.FC = () => {
   const initialFormData = {
@@ -18,104 +14,74 @@ const FormDataEntry: React.FC = () => {
 
   const [formDataComprador, setFormDataComprador] = useState(initialFormData);
   const [formDataVendedor, setFormDataVendedor] = useState(initialFormData);
+  const [llave, setLlave] = useState("");
 
-  const [errorsComprador, setErrorsComprador] = useState(initialFormData);
-  const [errorsVendedor, setErrorsVendedor] = useState(initialFormData);
-
-  // Función para manejar cambios en los inputs
-  const handleInputChange = (
-    fieldName: string,
-    value: string,
-    setFormData: React.Dispatch<React.SetStateAction<typeof initialFormData>>
-  ): void => {
-    setFormData((previous) => ({
-      ...previous,
-      [fieldName]: value,
-    }));
+  // Simulación de datos del comprador (pueden venir de una API)
+  const compradorRegistrado = {
+    nombre: "Juan Pérez",
+    cedula: "12345678",
+    correo: "juan.perez@example.com",
+    telefono: "555123456",
   };
 
-  // Validación del formulario
-  const validateForm = (
-    formData: typeof initialFormData,
-    setErrors: React.Dispatch<React.SetStateAction<typeof initialFormData>>
-  ): boolean => {
-    const newErrors = {
-      nombre: validateNombre(formData.nombre),
-      cedula: validateCedula(formData.cedula),
-      correo: validateCorreo(formData.correo),
-      telefono: validateTelefono(formData.telefono),
+  // Función para cargar automáticamente los datos del comprador
+  const cargarDatosComprador = ():void => {
+    setFormDataComprador(compradorRegistrado);
+  };
+
+  // Función para cargar los datos del vendedor al ingresar la llave
+  const cargarDatosVendedor = (llave: string):void => {
+    // Simulación de datos del vendedor (pueden venir de una API)
+    const vendedorRegistrado = {
+      nombre: "Ana Gomez",
+      cedula: "87654321",
+      correo: "anagomez@example.com",
+      telefono: "555654321",
     };
 
-    setErrors(newErrors);
-    return Object.values(newErrors).every((error) => error === "");
-  };
+    // Mostrar datos enmascarados
+    const enmascararDato = (dato: string):string =>
+      dato.length > 4
+        ? `${dato.slice(0, 2)}${"*".repeat(dato.length - 4)}${dato.slice(-2)}`
+        : dato;
 
-  // Función para manejar el envío del formulario
-  const handleSubmit = (
-    formData: typeof initialFormData,
-    setErrors: React.Dispatch<React.SetStateAction<typeof initialFormData>>
-  ): void => {
-    if (validateForm(formData, setErrors)) {
-      console.log("Formulario válido", formData);
-      // Aquí podrías enviar los datos al backend
-    } else {
-      console.log("Formulario con errores", formData);
-    }
-  };
-
-  // Función para reiniciar los formularios
-  const resetForm = (): void => {
-    setFormDataComprador(initialFormData);
-    setFormDataVendedor(initialFormData);
-    setErrorsComprador(initialFormData);
-    setErrorsVendedor(initialFormData);
+    setFormDataVendedor({
+      nombre: enmascararDato(vendedorRegistrado.nombre),
+      cedula: enmascararDato(vendedorRegistrado.cedula),
+      correo: enmascararDato(vendedorRegistrado.correo),
+      telefono: enmascararDato(vendedorRegistrado.telefono),
+    });
   };
 
   // Campos del formulario
-  const fields = (
-    formData: typeof initialFormData,
-    errors: typeof initialFormData,
-    setFormData: React.Dispatch<React.SetStateAction<typeof initialFormData>>
-  ) => [
+  const fields = (formData: typeof initialFormData):Array<Field> => [
     {
       name: "nombre",
       placeholder: "Nombre Completo",
       type: "text",
       value: formData.nombre,
-      onChange: (value: string): void => {
-        handleInputChange("nombre", value, setFormData);
-      },
-      error: errors.nombre,
+      readOnly: true, // Campo no editable
     },
     {
       name: "cedula",
       placeholder: "Número de Cédula",
       type: "text",
       value: formData.cedula,
-      onChange: (value: string): void => {
-        handleInputChange("cedula", value, setFormData);
-      },
-      error: errors.cedula,
+      readOnly: true, // Campo no editable
     },
     {
       name: "telefono",
       placeholder: "Teléfono",
       type: "text",
       value: formData.telefono,
-      onChange: (value: string): void => {
-        handleInputChange("telefono", value, setFormData);
-      },
-      error: errors.telefono,
+      readOnly: true, // Campo no editable
     },
     {
       name: "correo",
       placeholder: "Correo Electrónico",
       type: "email",
       value: formData.correo,
-      onChange: (value: string): void => {
-        handleInputChange("correo", value, setFormData);
-      },
-      error: errors.correo,
+      readOnly: true, // Campo no editable
     },
   ];
 
@@ -124,15 +90,19 @@ const FormDataEntry: React.FC = () => {
       label: "Pagar",
       type: "button",
       onClick: (): void => {
-        handleSubmit(formDataComprador, setErrorsComprador);
-        handleSubmit(formDataVendedor, setErrorsVendedor);
+        console.log("Datos del Comprador:", formDataComprador);
+        console.log("Datos del Vendedor:", formDataVendedor);
       },
       className: "bg-green-500 text-white py-2 px-4 rounded",
     },
     {
       label: "Cancelar",
       type: "button",
-      onClick: resetForm,
+      onClick: (): void => {
+        setFormDataComprador(initialFormData);
+        setFormDataVendedor(initialFormData);
+        setLlave("");
+      },
       className: "bg-gray-500 text-white py-2 px-4 rounded",
     },
   ];
@@ -142,33 +112,52 @@ const FormDataEntry: React.FC = () => {
       {/* Contenedor Principal */}
       <Container customClass="max-w-5xl">
         <div className="flex flex-col items-center w-full mt-8">
-          <h2 className="text-2xl font-bold mb-4">Ingreso De Datos</h2>
-          <p className="text-gray-600 mb-6">Por favor, completa los siguientes campos:</p>
+          <h2 className="text-2xl font-bold mb-4">Datos de los Participantes</h2>
+          <p className="text-gray-600 mb-6">Por favor, Ingresa la Llave:</p>
 
           {/* Contenedor de Formularios y Botones */}
           <div className="flex flex-row gap-8 justify-center items-start w-full">
             {/* Formulario Comprador */}
             <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+              <button
+                className="bg-blue-500 text-white py-2 px-4 rounded mb-4 hover:bg-blue-700"
+                onClick={cargarDatosComprador}
+              >
+                Cargar Datos del Comprador
+              </button>
               <DynamicForm
                 buttons={[]}
-                fields={fields(formDataComprador, errorsComprador, setFormDataComprador)}
+                fields={fields(formDataComprador)}
                 title="Datos del Comprador"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  console.log("Datos del Comprador:", formDataComprador);
+                onSubmit={(event) => {
+                  event.preventDefault();
                 }}
               />
             </div>
 
             {/* Formulario Vendedor */}
             <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+              {/* Campo para ingresar la llave */}
+              <div className="classname">
+                <label className="block text-gray-700 font-bold mb-2">Llave</label>
+                <input
+                  className="border border-gray-300 rounded-md p-2 w-full mb-4"
+                  placeholder="Llave"
+                  type="text"
+                  value={llave}
+                  onChange={(event) => {
+                    setLlave(event.target.value);
+                    cargarDatosVendedor(event.target.value);
+                  }}
+                />
+              </div>
+
               <DynamicForm
                 buttons={[]}
-                fields={fields(formDataVendedor, errorsVendedor, setFormDataVendedor)}
+                fields={fields(formDataVendedor)}
                 title="Datos del Vendedor"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  console.log("Datos del Vendedor:", formDataVendedor);
+                onSubmit={(event) => {
+                  event.preventDefault();
                 }}
               />
             </div>
@@ -179,9 +168,9 @@ const FormDataEntry: React.FC = () => {
             {buttons.map((button, index) => (
               <button
                 key={index}
+                className={button.className}
                 type={button.type}
                 onClick={button.onClick}
-                className={button.className}
               >
                 {button.label}
               </button>
@@ -194,3 +183,5 @@ const FormDataEntry: React.FC = () => {
 };
 
 export default FormDataEntry;
+
+// LLAVE: 12345-ABCDE

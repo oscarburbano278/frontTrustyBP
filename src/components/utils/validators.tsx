@@ -1,9 +1,8 @@
-
-export const nameRegex = /^[A-Za-z\s]{2,50}$/;
+export const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]{2,50}$/; // Permite letras con tildes y espacios
 export const cedulaRegex = /^\d{6,12}$/;
 export const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 export const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-export const phoneRegex = /^\d{10}$/;
+export const phoneRegex = /^\d{7,10}$/; // Permite solo dígitos entre 7 y 10 caracteres
 export const codigoRegex = /^\d{6}$/;
 
 export const validateCodigo = (codigo: string) => {
@@ -14,7 +13,7 @@ export const validateCodigo = (codigo: string) => {
 
 export const validateNombre = (nombre: string) => {
   if (!nombre.trim()) return "El nombre es obligatorio";
-  if (!nameRegex.test(nombre)) return "El nombre solo puede contener letras y espacios (2-50 caracteres)";
+  if (!nameRegex.test(nombre)) return "El nombre solo puede contener letras, tildes y espacios (2-50 caracteres)";
   return "";
 };
 
@@ -43,7 +42,7 @@ export const validateConfirmarContraseña = (contraseña: string, confirmar: str
 
 export const validateTelefono = (telefono: string) => {
   if (!telefono.trim()) return "El teléfono es obligatorio";
-  if (!phoneRegex.test(telefono)) return "El número de teléfono debe tener 10 dígitos";
+  if (!phoneRegex.test(telefono)) return "El número de teléfono debe tener entre 7 y 10 dígitos";
   return "";
 };
 
