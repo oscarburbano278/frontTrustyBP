@@ -1,20 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Home } from "../pages/Home";
-import CreateSale from "../pages/CreateSale";
-import TransactionsScreen from "../pages/TransactionsScreen";
-import TransactionTable from "../components/forms/transactionTable";
-import DynamicTransactionsScreen from "../components/layout/DynamicTransactionsScreen";
-import TransactionsDetailsScreen from "../pages/TransactionsDetailsScreen";
-import FormDataEntry from "../pages/FormDataEntry";
+
+import Conformity from "../pages/Conformity";
+import ModalDynamic from "../components/layout/modalDynamic";
+import ModalCodigo from "../components/forms/modalCodigo";
+import ModalRecovPass from "../components/forms/modalRecovPass";
+import ModalConfirmationCod from "../components/forms/modalConfirmationCod";
+import paymentNotification from "../pages/paymentNotification";
 
 
 
 
 
 export const Route = createFileRoute("/")({
-	//component: Home;
-	//component: CreateSale,
-	//component: TransactionsScreen,
-	//component: TransactionsDetailsScreen,
-	component: FormDataEntry
+	//component: Home,
+	//component: paymentNotification,
+	//component: ModalDynamic,
+	//component: ModalCodigo,
+	component: ModalConfirmationCod,
 });
